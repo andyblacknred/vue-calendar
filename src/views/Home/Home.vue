@@ -82,7 +82,7 @@ export default {
     }
   },
   mounted() {
-    this.month = this.buildMonthArray(new Date())
+    this.month = this.buildMonthArray(new Date());
   }
 }
 </script>
