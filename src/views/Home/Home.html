@@ -1,3 +1,9 @@
 <div class="page page--home">
-    <Calendar />
+    <Calendar :month-prop="chosenMonth" />
+    <div class="month__next" @click="previousMonth()">
+        prev month
+    </div>
+    <div class="month__next" @click="nextMonth()">
+        next month
+    </div>
 </div>

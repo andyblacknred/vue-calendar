@@ -1,17 +1,8 @@
 <div class="calendar">
-    <div class="calendar__month">
-        <div class="calendar__week">
+    <div v-for="week in month" class="calendar__month">
+        <div v-for="day in week" class="calendar__week">
             <div class="calendar__day">
-                1
-            </div>
-            <div class="calendar__day">
-                1
-            </div>
-            <div class="calendar__day">
-                1
-            </div>
-            <div class="calendar__day">
-                1
+                {{ day.day.getDate() }}
             </div>
         </div>
     </div>
