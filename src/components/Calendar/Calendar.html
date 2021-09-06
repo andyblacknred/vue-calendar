@@ -1,7 +1,13 @@
 <div class="calendar">
     <div v-for="week in month" class="calendar__month">
         <div v-for="day in week" class="calendar__week">
-            <div class="calendar__day">
+            <div
+                    class="calendar__day"
+                    :class="{
+                        'calendar__day--current': day.isCurrent,
+                        'calendar__day--not_chosen_month': !day.isChosenMonth,
+                        'calendar__day--chosen': day.isChosenDay
+            }">
                 {{ day.day.getDate() }}
             </div>
         </div>

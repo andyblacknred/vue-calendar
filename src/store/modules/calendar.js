@@ -19,7 +19,7 @@ const calendar = {
         INIT_CALENDAR_STORE(context) {
             if(!context.state.currentDate) {
                 context.commit('SET_CURRENT_DATE');
-                context.commit('SET_CHOSEN_DAY', context.currentDate);
+                context.commit('SET_CHOSEN_DAY', context.state.currentDate);
                 context.commit(
                     'SET_CHOSEN_MONTH',
                     new Date(
