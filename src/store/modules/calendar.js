@@ -31,7 +31,8 @@ const calendar = {
             }
         },
         SET_CHOSEN_DAY(context, payload) {
-            context.commit('SET_CURRENT_DATE', payload);
+            console.log(payload);
+            context.commit('SET_CHOSEN_DAY', payload);
         },
         NEXT_MONTH(context) {
             context.commit(

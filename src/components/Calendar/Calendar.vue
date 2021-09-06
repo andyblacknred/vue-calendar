@@ -1,7 +1,7 @@
 <template src="./Calendar.html" />
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   name: "Calendar",
@@ -11,6 +11,9 @@ export default {
     },
   },
   methods: {
+    ...mapActions({
+      chooseDay: 'SET_CHOSEN_DAY'
+    }),
     buildMonthArray(date, currentDate, chosenDay) {
 
       const firstDayOfMonth =
@@ -59,12 +62,13 @@ export default {
         const firstDayOfWeek = firstWeekOfMonth[0].day;
 
         if(firstDayOfWeek.getDay() !== 1) { // if first day of week is not Monday
+          const newFirstDayOfWeek = new Date(firstDayOfWeek.getFullYear(), firstDayOfWeek.getMonth(), firstDayOfWeek.getDate() - 1);
           firstWeekOfMonth.unshift(
               {
-                day: new Date(firstDayOfWeek.getFullYear(), firstDayOfWeek.getMonth(), firstDayOfWeek.getDate() - 1),
+                day: newFirstDayOfWeek,
                 isChosenMonth: false,
-                isCurrent: isSameDay(firstDayOfWeek, currentDate),
-                isChosenDay: isSameDay(firstDayOfWeek, chosenDay)
+                isCurrent: isSameDay(newFirstDayOfWeek, currentDate),
+                isChosenDay: isSameDay(newFirstDayOfWeek, chosenDay)
               }
           )
           fillDaysBefore();
@@ -76,12 +80,13 @@ export default {
         const lastDayOfWeek = lastWeekOfMonth[lastWeekOfMonth.length - 1].day;
 
         if(lastDayOfWeek.getDay() !== 0) { // if last day of week is not Sunday
+          const newLastDayOfWeek = new Date(lastDayOfWeek.getFullYear(), lastDayOfWeek.getMonth(), lastDayOfWeek.getDate() + 1);
           lastWeekOfMonth.push(
               {
-                day: new Date(lastDayOfWeek.getFullYear(), lastDayOfWeek.getMonth(), lastDayOfWeek.getDate() + 1),
+                day: newLastDayOfWeek,
                 isChosenMonth: false,
-                isCurrent: isSameDay(lastDayOfWeek, currentDate),
-                isChosenDay: isSameDay(lastDayOfWeek, chosenDay)
+                isCurrent: isSameDay(newLastDayOfWeek, currentDate),
+                isChosenDay: isSameDay(newLastDayOfWeek, chosenDay)
               }
           )
           fillDaysAfter();
@@ -100,7 +105,6 @@ export default {
       chosenDay: state => state.calendar.chosenDay
     }),
     month()  {
-      console.log(this.chosenDay);
       return this.buildMonthArray(this.monthProp, this.currentDate, this.chosenDay);
     }
   }

@@ -7,7 +7,9 @@
                         'calendar__day--current': day.isCurrent,
                         'calendar__day--not_chosen_month': !day.isChosenMonth,
                         'calendar__day--chosen': day.isChosenDay
-            }">
+                    }"
+                    @click="chooseDay(day.day)"
+            >
                 {{ day.day.getDate() }}
             </div>
         </div>
