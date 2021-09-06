@@ -6,4 +6,5 @@
     <div class="month__next" @click="nextMonth()">
         next month
     </div>
+    <router-link :to="`day/${chosenDay.getFullYear()}/${chosenDay.getMonth()}/${chosenDay.getDate()}`">show day</router-link>
 </div>

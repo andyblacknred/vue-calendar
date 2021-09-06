@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
+// views
 import Home from "@/views/Home/Home";
+import ChosenDay from "@/views/ChosenDay/ChosenDay";
 
 Vue.use(VueRouter)
 
@@ -10,7 +13,11 @@ const routes = [
     name: 'Home',
     component: Home
   },
-
+  {
+    path:'/day/:year/:month/:day',
+    name: 'ChosenDay',
+    component: ChosenDay
+  }
 ]
 
 const router = new VueRouter({

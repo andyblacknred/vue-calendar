@@ -1,0 +1,10 @@
+<div class="todo">
+    <input type="text" v-model="todoText">
+    <button @click="addToList">add to list</button>
+    <br>
+    <br>
+    <br>
+    <ul>
+        <li v-for="item in todoArray">{{ item }}</li>
+    </ul>
+</div>

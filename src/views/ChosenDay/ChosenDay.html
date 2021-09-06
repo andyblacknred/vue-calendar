@@ -1,0 +1,7 @@
+<div class="page page--day">
+    {{ new Date($route.params.year, $route.params.month, $route.params.day) }}
+    <br>
+    <ListsOfTodo />
+    <br>
+    <router-link to="/">go home</router-link>
+</div>
