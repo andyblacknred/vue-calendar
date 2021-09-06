@@ -6,12 +6,26 @@ export default {
   data() {
     return {
       todoText: '',
-      todoArray: []
+      todoTitle: '',
+    }
+  },
+  props: {
+    todoProp: {
+      type: Object
     }
   },
   methods: {
     addToList() {
-      this.todoArray.push(this.todoText);
+      this.$emit('add-to-list', this.todoText);
+    },
+    removeFromList(index) {
+      this.$emit('remove-from-list', index);
+    },
+    changeTitle() {
+      this.$emit('change-title', this.todoTitle);
+    },
+    changeStatus(index, status) {
+      this.$emit('change-status', [index, status]);
     }
   }
 }

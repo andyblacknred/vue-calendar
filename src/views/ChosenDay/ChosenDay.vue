@@ -1,12 +1,19 @@
 <template src="./ChosenDay.html" />
 
 <script>
+import {mapState} from "vuex";
+
 import ListsOfTodo from "@/components/ListsOfTodo/ListsOfTodo";
 
 export default {
   name: "ChosenDay",
   components: {
     ListsOfTodo
+  },
+  computed: {
+    ...mapState({
+      chosenDay: state => state.calendar.chosenDay
+    })
   }
 }
 </script>

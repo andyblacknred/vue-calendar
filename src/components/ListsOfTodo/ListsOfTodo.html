@@ -1,3 +1,11 @@
 <div class="list">
-    <Todo />
+    <Todo
+        @add-to-list="addToList(index, $event)"
+        @remove-from-list="removeFromList(index, $event)"
+        @change-title="changeTitle(index, $event)"
+        @change-status="changeStatus(index, ...$event)"
+        v-for="(todo, index) in listOfTodo"
+        :todo-prop="todo"
+        :key="index"
+    />
 </div>
