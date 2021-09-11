@@ -17,13 +17,6 @@ export default {
     ...mapGetters({
       listOfListsTodo: 'GET_LIST_OF_LISTS_BY_DATE'
     }),
-    chosenDayArray() {
-      return [
-          this.chosenDay.getFullYear(),
-          this.chosenDay.getMonth(),
-          this.chosenDay.getDate()
-      ]
-    }
   },
   data() {
     return {}
