@@ -30,17 +30,11 @@ export default {
   },
   methods: {
     ...mapActions({
-      addToList: 'ADD_TO_LIST'
+      addToList: 'ADD_TO_LIST',
+      removeFromList: 'REMOVE_FROM_LIST',
+      changeTitle: 'CHANGE_TITLE',
+      changeStatus: 'CHANGE_STATUS',
     }),
-    removeFromList(indexParent, indexChild) {
-      this.listOfListsTodo(...this.chosenDayArray)[indexParent].todoList.splice(indexChild, 1);
-    },
-    changeTitle(index, title) {
-      this.listOfListsTodo(...this.chosenDayArray)[index].title = title;
-    },
-    changeStatus(indexParent, indexChild, status) {
-      this.listOfListsTodo(...this.chosenDayArray)[indexParent].todoList[indexChild].isChecked = status;
-    }
   },
   mounted() {}
 }

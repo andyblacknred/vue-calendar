@@ -34,7 +34,7 @@ const calendar = {
         SET_CHOSEN_MONTH(state, payload) {
             state.chosenMonth = payload;
         },
-        ADD_TO_LIST(state, payload) {
+        CHANGE_LIST(state, payload) {
             const listOfListsTodo = state.datesWithLists.find(
                 datesWithListsItem =>
                     datesWithListsItem.date.getFullYear() === payload.date.getFullYear()
@@ -44,11 +44,23 @@ const calendar = {
                     datesWithListsItem.date.getDate() === payload.date.getDate()
             ).listOfListsTodo;
 
-            listOfListsTodo[payload.index].todoList.push({
-                text: payload.text,
-                isChecked: false
-            })
-        }
+            switch (payload.action) {
+                case 'addToList':
+                    listOfListsTodo[payload.index].todoList.push({
+                        text: payload.text,
+                        isChecked: false
+                    });
+                    break;
+                case 'removeFromList':
+                    listOfListsTodo[payload.index].todoList.splice(payload.indexChild, 1);
+                    break;
+                case 'changeTitle':
+                    listOfListsTodo[payload.index].title = payload.title;
+                    break
+                case 'changeStatus':
+                    listOfListsTodo[payload.index].todoList[payload.indexChild].isChecked = payload.status;
+            }
+        },
     },
     actions: {
         INIT_CALENDAR_STORE(context) {
@@ -89,19 +101,43 @@ const calendar = {
             );
         },
         ADD_TO_LIST(context, payload) {
-            console.log(payload);
-            context.commit('ADD_TO_LIST', payload);
+            const modifiedPayload = {
+                action: 'addToList',
+                ...payload
+            }
+            context.commit('CHANGE_LIST', modifiedPayload);
+        },
+        REMOVE_FROM_LIST(context, payload) {
+            const modifiedPayload = {
+                action: 'removeFromList',
+                ...payload
+            }
+            context.commit('CHANGE_LIST', modifiedPayload);
+        },
+        CHANGE_TITLE(context, payload) {
+            const modifiedPayload = {
+                action: 'changeTitle',
+                ...payload
+            }
+            context.commit('CHANGE_LIST', modifiedPayload);
+        },
+        CHANGE_STATUS(context, payload) {
+            const modifiedPayload = {
+                action: 'changeStatus',
+                ...payload
+            }
+            context.commit('CHANGE_LIST', modifiedPayload);
         }
     },
     getters: {
-        GET_LIST_OF_LISTS_BY_DATE: state => (year, month, day) => {
+        GET_LIST_OF_LISTS_BY_DATE: state => (chosenDate) => {
             return state.datesWithLists.find(
                 todo =>
-                    todo.date.getFullYear() === year
+                    todo.date.getFullYear() === chosenDate.getFullYear()
                         &&
-                    todo.date.getMonth() === month
+                    todo.date.getMonth() === chosenDate.getMonth()
                         &&
-                    todo.date.getDate() === day
+                    todo.date.getDate() === chosenDate.getDate()
             ).listOfListsTodo;
         }
     }

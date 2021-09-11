@@ -1,10 +1,10 @@
 <div class="list">
     <Todo
         @add-to-list="addToList({index, text: $event, date: chosenDay})"
-        @remove-from-list="removeFromList(index, $event)"
-        @change-title="changeTitle(index, $event)"
-        @change-status="changeStatus(index, ...$event)"
-        v-for="(todo, index) in listOfListsTodo(...this.chosenDayArray)"
+        @remove-from-list="removeFromList({index, indexChild: $event, date: chosenDay})"
+        @change-title="changeTitle({index, title: $event, date: chosenDay})"
+        @change-status="changeStatus({index, date: chosenDay, ...$event})"
+        v-for="(todo, index) in listOfListsTodo(chosenDay)"
         :todo-prop="todo"
         :key="index"
     />

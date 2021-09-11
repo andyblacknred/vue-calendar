@@ -25,7 +25,7 @@ export default {
       this.$emit('change-title', this.todoTitle);
     },
     changeStatus(index, status) {
-      this.$emit('change-status', [index, status]);
+      this.$emit('change-status', {indexChild: index, status});
     }
   }
 }
