@@ -1,7 +1,7 @@
 <template src="./ListsOfTodo.html" />
 
 <script>
-import {mapState} from "vuex";
+import {mapState, mapGetters, mapActions} from "vuex";
 
 import Todo from "@/components/Todo/Todo";
 
@@ -13,44 +13,36 @@ export default {
   computed: {
     ...mapState({
       chosenDay: state => state.calendar.chosenDay
-    })
-  },
-  data() {
-    return {
-      listOfTodo: [
-        {
-          title: 'asdasd',
-          todoList: [
-            {
-              text: '11asdad',
-              isChecked: false
-            },
-            {
-              text: 'sadsadad',
-              isChecked: true
-            }
-          ],
-          date: this.chosenDay
-        }
+    }),
+    ...mapGetters({
+      listOfListsTodo: 'GET_LIST_OF_LISTS_BY_DATE'
+    }),
+    chosenDayArray() {
+      return [
+          this.chosenDay.getFullYear(),
+          this.chosenDay.getMonth(),
+          this.chosenDay.getDate()
       ]
     }
   },
+  data() {
+    return {}
+  },
   methods: {
-    addToList(index, text) {
-
-      alert(this.chosenDay)
-      this.listOfTodo[index].todoList.push({text, isChecked: false});
-    },
+    ...mapActions({
+      addToList: 'ADD_TO_LIST'
+    }),
     removeFromList(indexParent, indexChild) {
-      this.listOfTodo[indexParent].todoList.splice(indexChild, 1);
+      this.listOfListsTodo(...this.chosenDayArray)[indexParent].todoList.splice(indexChild, 1);
     },
     changeTitle(index, title) {
-      this.listOfTodo[index].title = title;
+      this.listOfListsTodo(...this.chosenDayArray)[index].title = title;
     },
     changeStatus(indexParent, indexChild, status) {
-      this.listOfTodo[indexParent].todoList[indexChild].isChecked = status;
+      this.listOfListsTodo(...this.chosenDayArray)[indexParent].todoList[indexChild].isChecked = status;
     }
-  }
+  },
+  mounted() {}
 }
 </script>
 
