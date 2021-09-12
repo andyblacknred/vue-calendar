@@ -11,21 +11,26 @@ export default {
   },
   props: {
     todoProp: {
-      type: Object
+      type: Object,
+      required: true
+    },
+    editMode: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
     addToList() {
-      this.$emit('add-to-list', this.todoText);
+      if(this.editMode) this.$emit('add-to-list', this.todoText);
     },
     removeFromList(index) {
-      this.$emit('remove-from-list', index);
+      if(this.editMode) this.$emit('remove-from-list', index);
     },
     changeTitle() {
-      this.$emit('change-title', this.todoTitle);
+      if(this.editMode) this.$emit('change-title', this.todoTitle);
     },
     changeStatus(index, status) {
-      this.$emit('change-status', {indexChild: index, status});
+      if(this.editMode) this.$emit('change-status', {indexChild: index, status});
     }
   }
 }

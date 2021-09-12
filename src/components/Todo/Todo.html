@@ -1,13 +1,15 @@
 <div class="todo">
-    <input type="text" v-model="todoTitle">
-    <button @click="changeTitle">change title</button>
-    <br>
-    <br>
-    <input type="text" v-model="todoText">
-    <button @click="addToList">add to list</button>
-    <br>
-    <br>
-    <br>
+    <div v-if="editMode">
+        <input type="text" v-model="todoTitle">
+        <button @click="changeTitle">change title</button>
+        <br>
+        <br>
+        <input type="text" v-model="todoText">
+        <button @click="addToList">add to list</button>
+        <br>
+        <br>
+        <br>
+    </div>
     <h1>{{ todoProp.title }}</h1>
     <ul>
         <li v-for="(item, index) in todoProp.todoList">
@@ -17,7 +19,7 @@
             >
                 {{ item.text }}
             </span>
-            <button @click="removeFromList(index)">remove</button>
+            <button v-if="editMode" @click="removeFromList(index)">remove</button>
         </li>
     </ul>
 </div>

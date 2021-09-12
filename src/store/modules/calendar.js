@@ -7,7 +7,20 @@ const calendar = {
             {
                 listOfListsTodo: [
                     {
-                        title: 'default list',
+                        title: 'default list 1',
+                        todoList: [
+                            {
+                                text: 'default item 1',
+                                isChecked: false
+                            },
+                            {
+                                text: 'default item 2',
+                                isChecked: true
+                            }
+                        ]
+                    },
+                    {
+                        title: 'default list 2',
                         todoList: [
                             {
                                 text: 'default item 1',
