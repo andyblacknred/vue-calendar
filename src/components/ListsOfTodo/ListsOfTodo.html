@@ -4,6 +4,7 @@
         @remove-from-list="removeFromList({index, indexChild: $event, date: chosenDay})"
         @change-title="changeTitle({index, title: $event, date: chosenDay})"
         @change-status="changeStatus({index, date: chosenDay, ...$event})"
+        @remove-list="removeList({index})"
         v-for="(todo, index) in listOfListsTodo(chosenDay)"
         :todo-prop="todo"
         :key="index"

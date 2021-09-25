@@ -72,6 +72,10 @@ const calendar = {
                     break
                 case 'changeStatus':
                     listOfListsTodo[payload.index].todoList[payload.indexChild].isChecked = payload.status;
+                    break
+                case 'removeList':
+                    listOfListsTodo.splice(payload.index, 1);
+                    break
             }
         },
     },
@@ -140,10 +144,17 @@ const calendar = {
                 ...payload
             }
             context.commit('CHANGE_LIST', modifiedPayload);
+        },
+        REMOVE_LIST(context, payload) {
+            const modifiedPayload = {
+                action: 'removeList',
+                ...payload
+            }
+            context.commit('CHANGE_LIST', modifiedPayload);
         }
     },
     getters: {
-        GET_LIST_OF_LISTS_BY_DATE: state => (chosenDate) => {
+        GET_LIST_OF_LISTS_BY_CHOOSEN_DATE: state => (chosenDate) => {
             return state.datesWithLists.find(
                 todo =>
                     todo.date.getFullYear() === chosenDate.getFullYear()

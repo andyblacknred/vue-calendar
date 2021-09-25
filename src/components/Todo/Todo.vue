@@ -31,6 +31,9 @@ export default {
     },
     changeStatus(index, status) {
       if(this.editMode) this.$emit('change-status', {indexChild: index, status});
+    },
+    removeList() {
+      if(this.editMode) this.$emit('remove-list');
     }
   }
 }

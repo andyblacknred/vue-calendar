@@ -11,6 +11,9 @@
         <br>
     </div>
     <h1>{{ todoProp.title }}</h1>
+    <button v-if="!editMode" @click="editMode = true">edit</button>
+    <button v-else @click="editMode = false">close</button>
+    <button v-if="!editMode" @click="removeList">remove</button>
     <ul>
         <li v-for="(item, index) in todoProp.todoList">
             <span
