@@ -1,33 +1,19 @@
 <template src="./ListsOfTodo.html" />
 
 <script>
-import {mapState, mapGetters, mapActions} from "vuex";
+import {mapActions} from "vuex";
 
 import Todo from "@/components/Todo/Todo";
+import TodoMixin from "@/mixins/TodoMixin";
 
 export default {
   name: "ListsOfTodo",
   components: {
     Todo
   },
-  computed: {
-    ...mapState({
-      chosenDay: state => state.calendar.chosenDay
-    }),
-    ...mapGetters({
-      listOfListsTodo: 'GET_LIST_OF_LISTS_BY_CHOOSEN_DATE'
-    }),
-  },
-  data() {
-    return {}
-  },
+  mixins: [TodoMixin],
   methods: {
     ...mapActions({
-      addToList: 'ADD_TO_LIST',
-      removeFromList: 'REMOVE_FROM_LIST',
-      changeTitle: 'CHANGE_TITLE',
-      changeStatus: 'CHANGE_STATUS',
-      removeList: 'REMOVE_LIST',
       createList: 'CREATE_LIST',
     }),
     createListAndChangeRoute() {
@@ -35,7 +21,6 @@ export default {
       this.$router.push({path: `${this.listOfListsTodo(this.chosenDay).length - 1}`, append: true});
     }
   },
-  mounted() {}
 }
 </script>
 
