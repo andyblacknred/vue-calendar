@@ -4,9 +4,11 @@
         @remove-from-list="removeFromList({index, indexChild: $event, date: chosenDay})"
         @change-title="changeTitle({index, title: $event, date: chosenDay})"
         @change-status="changeStatus({index, date: chosenDay, ...$event})"
-        @remove-list="removeList({index})"
+        @remove-list="removeList({index, date: chosenDay})"
         v-for="(todo, index) in listOfListsTodo(chosenDay)"
         :todo-prop="todo"
         :key="index"
+        :index="index"
     />
+    <button @click="createListAndChangeRoute()">create new list</button>
 </div>

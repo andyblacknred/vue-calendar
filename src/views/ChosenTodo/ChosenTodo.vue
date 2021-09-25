@@ -1,12 +1,11 @@
-<template src="./ListsOfTodo.html" />
+<template src="./ChosenTodo.html" />
 
 <script>
-import {mapState, mapGetters, mapActions} from "vuex";
-
 import Todo from "@/components/Todo/Todo";
+import {mapActions, mapGetters, mapState} from "vuex";
 
 export default {
-  name: "ListsOfTodo",
+  name: "ChosenTodo",
   components: {
     Todo
   },
@@ -28,15 +27,9 @@ export default {
       changeTitle: 'CHANGE_TITLE',
       changeStatus: 'CHANGE_STATUS',
       removeList: 'REMOVE_LIST',
-      createList: 'CREATE_LIST',
     }),
-    createListAndChangeRoute() {
-      this.createList({date: this.chosenDay});
-      this.$router.push({path: `${this.listOfListsTodo(this.chosenDay).length - 1}`, append: true});
-    }
   },
-  mounted() {}
 }
 </script>
 
-<style lang="sass" scoped src="./ListsOfTodo.sass" />
+<style scoped src="./ChosenTodo.sass" lang="sass" />

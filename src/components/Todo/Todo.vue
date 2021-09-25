@@ -17,6 +17,10 @@ export default {
     editMode: {
       type: Boolean,
       default: false
+    },
+    index: {
+      type: Number,
+      default: 0
     }
   },
   methods: {
@@ -33,7 +37,7 @@ export default {
       if(this.editMode) this.$emit('change-status', {indexChild: index, status});
     },
     removeList() {
-      if(this.editMode) this.$emit('remove-list');
+      this.$emit('remove-list');
     }
   }
 }

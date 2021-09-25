@@ -1,42 +1,10 @@
 const calendar = {
-    state: () => ({
-        currentDate: false,
-        chosenDay: false,
-        chosenMonth: false,
-        datesWithLists: [
-            {
-                listOfListsTodo: [
-                    {
-                        title: 'default list 1',
-                        todoList: [
-                            {
-                                text: 'default item 1',
-                                isChecked: false
-                            },
-                            {
-                                text: 'default item 2',
-                                isChecked: true
-                            }
-                        ]
-                    },
-                    {
-                        title: 'default list 2',
-                        todoList: [
-                            {
-                                text: 'default item 1',
-                                isChecked: false
-                            },
-                            {
-                                text: 'default item 2',
-                                isChecked: true
-                            }
-                        ]
-                    }
-                ],
-                date: new Date()
-            }
-        ]
-    }),
+    state: {
+        currentDate: new Date(),
+        chosenDay: new Date(),
+        chosenMonth: new Date(),
+        datesWithLists: []
+    },
     mutations: {
         SET_CURRENT_DATE(state) {
             state.currentDate = new Date();
@@ -75,6 +43,12 @@ const calendar = {
                     break
                 case 'removeList':
                     listOfListsTodo.splice(payload.index, 1);
+                    break
+                case 'createList':
+                    listOfListsTodo.push({
+                        title: '',
+                        todoList: []
+                    });
                     break
             }
         },
@@ -151,18 +125,36 @@ const calendar = {
                 ...payload
             }
             context.commit('CHANGE_LIST', modifiedPayload);
+        },
+        CREATE_LIST(context, payload) {
+            const modifiedPayload = {
+                action: 'createList',
+                ...payload
+            }
+            context.commit('CHANGE_LIST', modifiedPayload);
         }
     },
     getters: {
         GET_LIST_OF_LISTS_BY_CHOOSEN_DATE: state => (chosenDate) => {
-            return state.datesWithLists.find(
+            const currentDateWithLists = state.datesWithLists.find(
                 todo =>
                     todo.date.getFullYear() === chosenDate.getFullYear()
-                        &&
+                    &&
                     todo.date.getMonth() === chosenDate.getMonth()
-                        &&
+                    &&
                     todo.date.getDate() === chosenDate.getDate()
-            ).listOfListsTodo;
+            );
+
+            if (!currentDateWithLists) {
+                const newDateWithLists = {
+                    date: chosenDate,
+                    listOfListsTodo: []
+                }
+                state.datesWithLists.push(newDateWithLists)
+                return [newDateWithLists];
+            }
+
+            return currentDateWithLists.listOfListsTodo;
         }
     }
 }

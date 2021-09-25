@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 // views
 import Home from "@/views/Home/Home";
 import ChosenDay from "@/views/ChosenDay/ChosenDay";
+import ChosenTodo from "@/views/ChosenTodo/ChosenTodo";
 
 Vue.use(VueRouter)
 
@@ -16,8 +17,14 @@ const routes = [
   {
     path:'/day/:year/:month/:day',
     name: 'ChosenDay',
-    component: ChosenDay
+    component: ChosenDay,
+  },
+  {
+    path: '/day/:year/:month/:day/:id',
+    name: 'ChosenTodo',
+    component: ChosenTodo
   }
+
 ]
 
 const router = new VueRouter({

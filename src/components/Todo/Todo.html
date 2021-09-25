@@ -11,9 +11,9 @@
         <br>
     </div>
     <h1>{{ todoProp.title }}</h1>
-    <button v-if="!editMode" @click="editMode = true">edit</button>
-    <button v-else @click="editMode = false">close</button>
-    <button v-if="!editMode" @click="removeList">remove</button>
+    <router-link v-if="!editMode" :to="`${ index }`" append tag="button">edit</router-link>
+    <button v-else @click="$router.back()">close</button>
+    <button v-if="!editMode" @click="removeList">remove this list</button>
     <ul>
         <li v-for="(item, index) in todoProp.todoList">
             <span
