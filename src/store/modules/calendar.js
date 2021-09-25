@@ -1,8 +1,8 @@
 const calendar = {
     state: {
-        currentDate: new Date(),
-        chosenDay: new Date(),
-        chosenMonth: new Date(),
+        currentDate: false,
+        chosenDay: false,
+        chosenMonth: false,
         datesWithLists: []
     },
     mutations: {
@@ -51,6 +51,8 @@ const calendar = {
                     });
                     break
             }
+
+            localStorage.setItem('datesWithLists', JSON.stringify(state.datesWithLists));
         },
     },
     actions: {
@@ -66,6 +68,15 @@ const calendar = {
                         1
                     )
                 );
+            }
+            if(localStorage.getItem('datesWithLists')) {
+                const datesWithLists = JSON.parse(localStorage.getItem('datesWithLists'));
+
+                datesWithLists.forEach(singleDateWithLists => {
+                    singleDateWithLists.date = new Date(singleDateWithLists.date);
+                })
+
+                context.state.datesWithLists = datesWithLists;
             }
         },
         SET_CHOSEN_DAY(context, payload) {
