@@ -1,10 +1,12 @@
 <div class="page page--home">
-    <Calendar :month-prop="chosenMonth" />
-    <div class="month__next" @click="previousMonth()">
-        prev month
+    <div class="page__inner">
+        <Calendar :month-prop="chosenMonth" />
+        <div class="month__next" @click="previousMonth()">
+            prev month
+        </div>
+        <div class="month__next" @click="nextMonth()">
+            next month
+        </div>
+        <router-link :to="`day/${chosenDay.getFullYear()}/${chosenDay.getMonth()}/${chosenDay.getDate()}`">show day</router-link>
     </div>
-    <div class="month__next" @click="nextMonth()">
-        next month
-    </div>
-    <router-link :to="`day/${chosenDay.getFullYear()}/${chosenDay.getMonth()}/${chosenDay.getDate()}`">show day</router-link>
 </div>

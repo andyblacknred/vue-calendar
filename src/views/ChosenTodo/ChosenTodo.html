@@ -1,12 +1,16 @@
-<div class="single_todo">
-    <Todo
-            @add-to-list="addToList({index: $route.params.id, text: $event, date: chosenDay})"
-            @remove-from-list="removeFromList({index: $route.params.id, indexChild: $event, date: chosenDay})"
-            @change-title="changeTitle({index: $route.params.id, title: $event, date: chosenDay})"
-            @change-status="changeStatus({index: $route.params.id, date: chosenDay, ...$event})"
-            @remove-list="removeList({index: $route.params.id, date: chosenDay})"
-            :todo-prop="listOfListsTodo(chosenDay)[$route.params.id]"
-            :key="$route.params.id"
-            :edit-mode="true"
-    />
+<div class="page page--todo">
+    <div class="page__inner">
+        <div class="single_todo">
+            <Todo
+                    @add-to-list="addToList({index: $route.params.id, text: $event, date: chosenDay})"
+                    @remove-from-list="removeFromList({index: $route.params.id, indexChild: $event, date: chosenDay})"
+                    @change-title="changeTitle({index: $route.params.id, title: $event, date: chosenDay})"
+                    @change-status="changeStatus({index: $route.params.id, date: chosenDay, ...$event})"
+                    @remove-list="removeList({index: $route.params.id, date: chosenDay})"
+                    :todo-prop="listOfListsTodo(chosenDay)[$route.params.id]"
+                    :key="$route.params.id"
+                    :edit-mode="true"
+            />
+        </div>
+    </div>
 </div>
