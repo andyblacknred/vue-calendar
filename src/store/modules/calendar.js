@@ -1,5 +1,6 @@
 const calendar = {
     state: {
+        monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
         currentDate: false,
         chosenDay: false,
         chosenMonth: false,

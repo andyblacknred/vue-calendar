@@ -12,7 +12,8 @@ export default {
   },
   computed: {
     ...mapState({
-      chosenDay: state => state.calendar.chosenDay
+      chosenDay: state => state.calendar.chosenDay,
+      monthNames: state => state.calendar.monthNames,
     })
   }
 }
