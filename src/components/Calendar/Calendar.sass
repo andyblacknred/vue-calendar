@@ -1,4 +1,5 @@
 .calendar
+  margin-bottom: 25px
   &__month
     display: flex
     width: 100%
@@ -7,12 +8,18 @@
   &__day
     width: 50px
     border: 2px solid transparent
-    padding: 5px
+    padding: 15px 5px
+    cursor: pointer
+    border-radius: 4px
+    text-align: center
+    transition: 0.5s
     &--not_chosen_month
       opacity: 0.3
     &--chosen
       border-color: black
       &.calendar__day--current
-        border-color: red
+        border-color: $red
+        background-color: $red
+        color: $white
     &--current
       color: red
